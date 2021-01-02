@@ -21,8 +21,10 @@ class ViewController: UIViewController {
         button.setTitle(viewModel.loginButton, for: .normal)
     }
     
+
     @IBAction func didTapLogin() {
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .seconds(3)) {
+        let deadline = DispatchTime.now() + .seconds(3)
+        DispatchQueue.main.asyncAfter(deadline: deadline) {
             print("login")
             self.performSegue(withIdentifier: "seque.Main.loginToApp", sender: nil)
         }
