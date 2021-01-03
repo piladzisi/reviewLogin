@@ -15,7 +15,10 @@ class MainAppVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        guard let username = self.username  else { return }
-        greetingLabel.text = "Hello, \(username)!"
+        if let username = self.username, username != "" {
+            greetingLabel.text = "Hello, \(username)!"
+        } else {
+            greetingLabel.text = "Hello, stranger!"
+        }
     }
 }
