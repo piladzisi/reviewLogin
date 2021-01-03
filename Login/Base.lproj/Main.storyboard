@@ -67,10 +67,10 @@
             </objects>
             <point key="canvasLocation" x="71" y="88"/>
         </scene>
-        <!--View Controller-->
+        <!--Main AppVC-->
         <scene sceneID="4b3-Wa-Iz9">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="s9e-xw-qFn" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="s9e-xw-qFn" customClass="MainAppVC" customModule="Login" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="FSc-S0-QNV">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -90,6 +90,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="0kk-NQ-Hz1"/>
+                    <connections>
+                        <outlet property="greetingLabel" destination="M8Y-8j-OwS" id="87r-bA-LdF"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HdQ-br-O09" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

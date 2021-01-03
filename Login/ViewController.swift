@@ -26,7 +26,14 @@ class ViewController: UIViewController {
         let deadline = DispatchTime.now() + .seconds(3)
         DispatchQueue.main.asyncAfter(deadline: deadline) {
             print("login")
-            self.performSegue(withIdentifier: "seque.Main.loginToApp", sender: nil)
+            self.performSegue(withIdentifier: "seque.Main.loginToApp", sender: self.usernameTextField.text)
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+        if let mainAppVC = segue.destination as? MainAppVC, let username = sender as? String {
+            mainAppVC.username = username
         }
     }
 }
