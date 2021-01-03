@@ -10,15 +10,15 @@ import UIKit
 class MainAppVC: UIViewController {
     
     @IBOutlet weak var greetingLabel: UILabel!
-    var username: String?
+    @IBOutlet weak var avatar: UIImageView!
+    
+    var user: User?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let username = self.username, username != "" {
-            greetingLabel.text = "Hello, \(username)!"
-        } else {
-            greetingLabel.text = "Hello, stranger!"
-        }
+        guard let user = self.user else { return }
+        greetingLabel.text = "Hello, \(user.name)! You are a \(user.occupation)!"
+        avatar.image = user.avatar
     }
 }
