@@ -43,6 +43,7 @@
                                 </state>
                                 <connections>
                                     <action selector="didTapLogin" destination="BYZ-38-t0r" eventType="touchUpInside" id="Yr8-Y0-0lH"/>
+                                    <segue destination="s9e-xw-qFn" kind="show" destinationCreationSelector="makeMainAppVCWithCoder:" id="vnO-5M-Jbs"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -60,7 +61,6 @@
                         <outlet property="button" destination="ivh-BE-Aop" id="5PN-f1-G5c"/>
                         <outlet property="passwordTextField" destination="qz5-u8-i8y" id="TMi-dV-IfZ"/>
                         <outlet property="usernameTextField" destination="aFL-nb-JWj" id="aVZ-Lr-1g0"/>
-                        <segue destination="s9e-xw-qFn" kind="show" identifier="seque.Main.loginToApp" id="8pC-1Y-hsr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

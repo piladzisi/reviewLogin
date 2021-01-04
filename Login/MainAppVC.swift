@@ -9,16 +9,26 @@ import UIKit
 
 class MainAppVC: UIViewController {
     
+    private let user: User
     @IBOutlet weak var greetingLabel: UILabel!
     @IBOutlet weak var avatar: UIImageView!
     
-    var user: User?
+    required init?(coder: NSCoder) {
+      fatalError("init(coder:) is not implemented")
+    }
+    
+    init?(user: User, coder: NSCoder) {
+      self.user = user
+      super.init(coder: coder)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        guard let user = self.user else { return }
         greetingLabel.text = "Hello, \(user.name)! You are a \(user.occupation)!"
         avatar.image = user.avatar
     }
 }
+
+
+
+
