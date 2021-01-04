@@ -17,6 +17,7 @@ class ViewController: UIViewController {
     
     let correctUsername = "Anna"
     let correctPassword = "12345"
+    let queue = OperationQueue()
     
     override func viewDidLoad() {
         usernameTextField.placeholder = viewModel.username
@@ -30,13 +31,22 @@ class ViewController: UIViewController {
             usernameTextField.text == correctUsername,
             passwordTextField.text == correctPassword
         else { incorrectLoginAlert(); return }
+    
     }
     
     @IBSegueAction func makeMainAppVC(coder: NSCoder) -> MainAppVC? {
+        queue.addOperation(simulateNetworking)
+        
         let user = User(name: "Anna", occupation: "developer", avatar: #imageLiteral(resourceName: "myImage"))
         return MainAppVC(user: user, coder: coder)
     }
     
+    func simulateNetworking() {
+        DispatchQueue.main.async {
+            sleep(3)
+        }
+    }
+
     func incorrectLoginAlert() {
         let alert = UIAlertController(title: "Login Failed",
                                       message: "Incorrect username or password, please try again",
