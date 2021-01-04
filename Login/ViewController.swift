@@ -30,20 +30,11 @@ class ViewController: UIViewController {
             usernameTextField.text == correctUsername,
             passwordTextField.text == correctPassword
         else { incorrectLoginAlert(); return }
-        
-        let deadline = DispatchTime.now() + .seconds(3)
-        DispatchQueue.main.asyncAfter(deadline: deadline) {
-            //self.makeMainAppVC(coder: self.coder)
-        }
     }
     
     @IBSegueAction func makeMainAppVC(coder: NSCoder) -> MainAppVC? {
         let user = User(name: "Anna", occupation: "developer", avatar: #imageLiteral(resourceName: "myImage"))
         return MainAppVC(user: user, coder: coder)
-    }
-    
-    func makeVC(coder: NSCoder) {
-        
     }
     
     func incorrectLoginAlert() {
