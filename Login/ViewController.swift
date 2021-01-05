@@ -15,7 +15,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var button: UIButton!
     
-    let correctUsername = "Anna"
+    var users: [String] = []
+    var username: String = ""
     let correctPassword = "12345"
     let queue = OperationQueue()
     
@@ -23,30 +24,59 @@ class ViewController: UIViewController {
         usernameTextField.placeholder = viewModel.username
         passwordTextField.placeholder = viewModel.password
         button.setTitle(viewModel.loginButton, for: .normal)
+        getUsers()
     }
     
     
     @IBAction func didTapLogin() {
+        guard let username = usernameTextField.text else { return }
+        self.username = username
         guard
-            usernameTextField.text == correctUsername,
+            users.contains(username),
             passwordTextField.text == correctPassword
         else { incorrectLoginAlert(); return }
-    
+        
     }
     
     @IBSegueAction func makeMainAppVC(coder: NSCoder) -> MainAppVC? {
-        queue.addOperation(simulateNetworking)
-        
-        let user = User(name: "Anna", occupation: "developer", avatar: #imageLiteral(resourceName: "myImage"))
+        let user = User(name: username, occupation: "developer", avatar: #imageLiteral(resourceName: "myImage"))
         return MainAppVC(user: user, coder: coder)
     }
     
-    func simulateNetworking() {
-        DispatchQueue.main.async {
-            sleep(3)
+    func getUsers() {
+        let baseUrl = "https://jsonplaceholder.typicode.com/"
+        guard let usersUrl = URL(string: (baseUrl + "users")) else { return }
+        
+        let session = URLSession.shared
+        let dataTask = session.dataTask(with: usersUrl) { (data, response, error) in
+            if let response = response  as? HTTPURLResponse{
+                print(response.statusCode)
+            }
+            
+            if let error = error {
+                print(error)
+            } else if let data = data {
+                do {
+                    guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [[String : Any]] else { return }
+                    for user in json {
+                        guard let name = user["name"] as? String else { return }
+                        var firstName: String
+                        
+                        if let i = name.firstIndex(of: " ") {
+                            firstName = String(name[..<i])
+                            self.users.append(firstName)
+                            print(self.users)
+                        }
+                    }
+                } catch {
+                    print(error)
+                }
+            }
         }
+        
+        dataTask.resume()
     }
-
+    
     func incorrectLoginAlert() {
         let alert = UIAlertController(title: "Login Failed",
                                       message: "Incorrect username or password, please try again",
