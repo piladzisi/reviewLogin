@@ -15,8 +15,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var button: UIButton!
     
-    var users: [String] = []
-    var username: String = ""
+    var users = ["Anna"]
+    var username = ""
     let correctPassword = "12345"
     let queue = OperationQueue()
     
@@ -65,9 +65,9 @@ class ViewController: UIViewController {
                         if let i = name.firstIndex(of: " ") {
                             firstName = String(name[..<i])
                             self.users.append(firstName)
-                            print(self.users)
                         }
                     }
+                    print(self.users)
                 } catch {
                     print(error)
                 }
